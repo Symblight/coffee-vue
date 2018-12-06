@@ -1,0 +1,12 @@
+.DS_STORE
+node_modules
+build
+dist
+.cache
+.module-cache
+*.log*
+
+
+_nogit
+package-lock.json
+yarn.lock

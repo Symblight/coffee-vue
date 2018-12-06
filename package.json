@@ -1,0 +1,29 @@
+{
+  "name": "coffee",
+  "version": "1.0.0",
+  "description": "Coffee",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Symblight/coffee-vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Symblight/coffee-vue/issues"
+  },
+  "homepage": "https://github.com/Symblight/coffee-vue#readme",
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^2.3.0",
+    "parcel-bundler": "^1.10.3",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.1"
+  }
+}
