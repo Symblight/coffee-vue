@@ -1,0 +1,115 @@
+export const drinks = [
+    {
+        id: 1,
+        name: 'Эспрессо',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 2.00,
+        volume: '30 мл'
+    },
+    {
+        id: 2,
+        name: 'Латте',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 3.50,
+        volume: '350 мл'
+    },
+    {
+        id: 3,
+        name: 'Капучино',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 3,
+        volume: '250 мл'
+    },
+    {
+        id: 4,
+        name: 'Раф-кофе',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 4,
+        volume: '250 мл'
+    },
+    {
+        id: 5,
+        name: 'Американо',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 2.50,
+        volume: '110 мл'
+    },
+    {
+        id: 6,
+        name: 'Флэт‑уайт',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 5,
+        volume: '250 мл'
+    },
+    {
+        id: 7,
+        name: 'Мокачино',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 4,
+        volume: '350 мл'
+    },
+    {
+        id: 8,
+        name: 'Лонг блэк',
+        url: 'https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg',
+        description: '',
+        price: 4,
+        volume: '110 мл'
+    },
+];
+
+export const foods = [
+    {
+        id: 9,
+        name: 'Chonga Bagel',
+        url: 'https://globalassets.starbucks.com/assets/764e55c343254ca2b4a034f49b6d213f.jpg',
+        description: '',
+        price: 1.20
+    },
+    {
+        id: 10,
+        name: '8-Grain Roll',
+        url: 'https://globalassets.starbucks.com/assets/eb456c511c534848bb09c048b4daaed0.jpg',
+        description: '',
+        price: 2.00
+    },
+    {
+        id: 11,
+        name: 'Apple Cider Doughnut',
+        url: 'https://globalassets.starbucks.com/assets/5688d4cc6e0944d3b2573fdf13cc02ec.jpg',
+        description: '',
+        price: 1.50
+    },
+    {
+        id: 12,
+        name: 'Banana Nut Bread',
+        url: 'https://globalassets.starbucks.com/assets/e5639f66b00946eaa1c8bb4a0703a5c0.jpg',
+        description: '',
+        price: 1.00
+    },
+    {
+        id: 13,
+        name: 'Cheese Danish',
+        url: 'https://globalassets.starbucks.com/assets/4b5908998d9e421687a7f9166d51587a.jpg',
+        description: '',
+        price: 1.20
+    },
+];
+
+export const users = [    
+    {
+        id: 1,
+        first_name: '',
+        last_name: '',
+        middle_name: '',
+        username: '',
+        password: ''
+    }
+];

@@ -1,9 +1,9 @@
 <template>
     <div id="container">
         <Header></Header>
-        <menu class="content">
+        <section class="content container">
             <router-view></router-view>
-        </menu>
+        </section>
         <Footer />
     </div>
 </template>
@@ -26,6 +26,7 @@ export default {
 .content {
     display: flex;
     flex-grow: 1;
+    margin-top: 2rem;
 }
 #container {
   display: flex;
