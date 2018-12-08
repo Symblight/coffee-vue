@@ -113,3 +113,13 @@ export const users = [
         password: ''
     }
 ];
+
+export const order = [
+    {
+        id: 1,
+        username: '',
+        count: 0,
+        totalСost: 0,
+        products: []
+    }
+];
