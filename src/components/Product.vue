@@ -10,18 +10,20 @@
                 <p>Стоимость:</p>
                 <p>{{data.price}}р</p>
             </div>
-            <button v-on:click="click(data.id)" class="button is-primary">Взять</button>
+            <button v-on:click="handleOrder(data)" class="button is-primary">Взять</button>
         </div>
     </div>
 </template>
 
 <script>
+import { store } from '../core/store'
+
 export default {
     props: ['data'],
     name: 'Product',
     methods: {
-        click(id) {
-            console.log(`product id: ${id}`);
+        handleOrder(value) {
+            store.setProductToOrder(value)
         }
     }
 }

@@ -1,9 +1,10 @@
 <template>
     <nav class="navbar" id="header" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item" href="#">
-                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-            </a>
+            <router-link class="navbar-item" to="/home">
+                <!-- <img src="http://www.starbucks.ru/media/logo_tcm84-366_w1024_n.png" width="112" height="28"> -->
+                <strong>Coffee</strong>
+            </router-link>
         </div>
 
         <div id="navbarBasicExample" class="navbar-menu">
