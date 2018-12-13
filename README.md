@@ -1,6 +1,7 @@
 Coffee
 
 1) npm install
-2) npm run start
+2) npm run server
+3) npm run start
 
-Server will run: http://localhost:1234
+Web site will run: http://localhost:1234

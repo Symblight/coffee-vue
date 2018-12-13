@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { signUp } from "../../core/api";
+
 export default {
     name: 'SignUp',
     data(){
@@ -77,7 +79,10 @@ export default {
                     adress: this.adress
                 }
 
-                console.log(user)
+                signUp(user)
+                    .then(data => {
+                        console.log(data);
+                    })
             },
         }
 }

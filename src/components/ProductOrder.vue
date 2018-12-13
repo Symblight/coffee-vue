@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <img v-bind:src="data.url" width="50" height="50" />
-        <div class="content">
+        <div class="info">
             <div>
                 <strong>{{data.name}}</strong>
                 <span>Стоимость: {{data.price}}р</span>
@@ -9,7 +9,7 @@
             <p>Количество: 0</p>
         </div>
         <div class="action">
-            <i v-on:click="handleDelete(data.id)">x</i>
+            <i class="material-icons" v-on:click="$emit('onremove', data.id)">delete</i>
         </div>
     </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     props: ['data'],
     methods: {
         handleDelete(id) {
-            console.log(id);
+            this.$emit('onRemove');
         },
     }
 }
@@ -45,7 +45,7 @@ export default {
         margin-right: 25px;
     }
 
-    .content {
+    .info {
         display: flex;
         flex-direction: row;
         flex-grow: 1;

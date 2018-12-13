@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import { login } from "../../core/api";
+
     export default {
         name: 'Login',
         data(){
@@ -55,7 +57,10 @@
                     password: this.password,
                 }
 
-                console.log(user)
+                login(user)
+                    .then(data => {
+                        console.log(data);
+                })
             },
         }
     }

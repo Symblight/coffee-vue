@@ -7,18 +7,30 @@
 <script>
 import Product from '../../components/Product'
 
+import { getFoods } from "../../core/api";
 import { store } from '../../core/store'
 
 export default {
     name: 'Foods',
     data() {
         return {
-            foods: store.state.foods
+            foods: []
         }
     },
     components: {
         Product
-    }
+    },
+    mounted: function () {
+        this.$nextTick(function () {
+            getFoods()
+                .then((foods) => {
+                    this.foods = foods.data
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
+    },
 }
 </script>
 

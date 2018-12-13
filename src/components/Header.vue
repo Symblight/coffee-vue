@@ -2,8 +2,8 @@
     <nav class="navbar" id="header" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/home">
-                <!-- <img src="http://www.starbucks.ru/media/logo_tcm84-366_w1024_n.png" width="112" height="28"> -->
-                <strong>Coffee</strong>
+                <img src="http://www.starbucks.ru/media/logo_tcm84-366_w1024_n.png" width="30" height="30">
+                <strong>Think Coffee</strong>
             </router-link>
         </div>
 
@@ -15,6 +15,14 @@
 
                 <router-link to="/order" class="navbar-item">
                     Заказ
+                </router-link>
+
+                <router-link to="/drinks" class="navbar-item">
+                    Напитки
+                </router-link>
+
+                <router-link to="/foods" class="navbar-item">
+                    Еда
                 </router-link>
             </div>
 

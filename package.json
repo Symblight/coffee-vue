@@ -4,7 +4,8 @@
   "description": "Coffee",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "server": "node ./server/server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
     "vue-template-compiler": "^2.5.17"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.1",
     "vue-router": "^3.0.2"

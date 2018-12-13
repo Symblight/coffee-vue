@@ -2,12 +2,12 @@
     <div class="container">
         <h1>Заказ:</h1>
         <div class="menu">
-            <ProductOrder v-for="product in order" :key="product.id" v-bind:data="product"></ProductOrder>
+            <ProductOrder v-for="product in order" :key="product.id" v-bind:data="product" @onRemove="onRemove"></ProductOrder>
         </div>
-        <div>Количество товаров: </div>
-        <div>Сумма: </div>
-        <button v-on:click="onOrder">Заказать</button>
-        <button v-on:click="onClear">Очистить заказ</button>
+        <div>Количество товаров: {{countProducts}}</div>
+        <div>Сумма: {{totalCost}}</div>
+        <button class="button is-success" v-on:click="onOrder">Заказать</button>
+        <button class="button" v-on:click="onClear">Очистить заказ</button>
     </div>
 </template>
 
@@ -24,19 +24,28 @@ export default {
     },
     methods: {
         onClear() {
-            store.clearOrder()
+            this.order = []
         },
-        onOrder(){
-            store.setOrder()
+        onOrder() {
+          //  store.setOrder()
+         // this.clearOrder()
+         this.order = []
+        },
+        onRemove(id) {
+         //   store.removeProduct(id)
+         this.order = this.order.filter(product => product.id !== id)
         }
     },
     components: {
         ProductOrder
     },
     computed: {
-        order() {
-            return this.order
+        countProducts() {
+            return this.order.length
         },
+        totalCost() {
+            return this.order.map(product => product.price)
+        }
     },
 }
 </script>

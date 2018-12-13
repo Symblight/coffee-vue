@@ -7,12 +7,19 @@ export const store = {
         order: [],
     },
     setProductToOrder(product) {
+        console.log('set product!')
         this.state.order.push(product)
     },
     setOrder() {
+        console.log('set order!')
         this.clearOrder()
     },
     clearOrder() {
+        console.log('clear!')
         this.state.order = []
+    },
+    removeProduct(id) {
+        console.log('remove!', id)
+        this.state.order = this.state.order.filter(product => product.id !== id)
     }
 }
