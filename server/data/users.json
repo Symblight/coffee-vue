@@ -1,0 +1,15 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "first_name": "Ira",
+            "last_name": "Krylova",
+            "middle_name": null,
+            "username": "Krylova",
+            "password": "Krylova",
+            "adress": "Minsk",
+            "accumulationСardProcent" : 10,
+            "accumulationTotal": 0
+        }
+    ]
+}

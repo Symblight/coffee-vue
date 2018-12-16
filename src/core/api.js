@@ -34,6 +34,32 @@ export const signUp = (data) => {
     })
 }
 
+export const getUser = (id) => {
+    return new Promise((resolve, reject) =>{
+        const xhr = new XMLHttpRequest();
+        const url = `http://localhost:5000/api/user/${id}`;
+
+        xhr.open("GET", url, true);
+        xhr.onload = function() {
+            if (this.status >= 200 && this.status < 300) {
+                resolve(JSON.parse(xhr.response));
+              } else {
+                reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+                });
+              }
+            };
+            xhr.onerror = function () {
+              reject({
+                status: this.status,
+                statusText: xhr.statusText
+              });
+            };
+        xhr.send();
+    })
+}
+
 export const getDrinks = () => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();

@@ -46,8 +46,9 @@ export default new VueRouter({
             component: SignUp
         },
         {
-            path: '/profile',
-            component: Profile
+            path: '/profile/:id',
+            component: Profile,
+            props: true
         },
         {
             path: '*',

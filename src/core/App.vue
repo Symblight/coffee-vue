@@ -3,6 +3,7 @@
         <Header></Header>
         <section class="content container">
             <router-view></router-view>
+            <router-link to="/order" class="order">Order</router-link>
         </section>
         <Footer />
     </div>
@@ -32,5 +33,18 @@ export default {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+}
+
+.order { 
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 18px;
+    background-color: #00d1b2;
+    padding: 12px;
 }
 </style>

@@ -14,15 +14,15 @@
                 </router-link>
 
                 <router-link to="/order" class="navbar-item">
-                    Заказ
+                    <div class="ic" v-html="require(`../assets/icons/breakfast.svg`)"></div>
                 </router-link>
 
                 <router-link to="/drinks" class="navbar-item">
-                    Напитки
+                    <div class="ic" v-html="require(`../assets/icons/coffee.svg`)"></div>
                 </router-link>
 
                 <router-link to="/foods" class="navbar-item">
-                    Еда
+                    <div class="ic" v-html="require(`../assets/icons/doughnut.svg`)"></div>
                 </router-link>
             </div>
 
@@ -43,13 +43,26 @@
 </template>
 
 <script>
+import Coffee from '../assets/icons/coffee.svg'
+import Doughnut from '../assets/icons/doughnut.svg'
+import Breakfast from '../assets/icons/breakfast.svg'
+
 export default {
     name: 'Header',
+    data() {
+        return {
+            coffee: Coffee
+        }
+    }
 }
 </script>
 
 <style scoped>
 #header {
     border-bottom: 1px solid #e5e5e5;
+}
+.ic,svg {
+    width: 25px;
+    height: 25px;
 }
 </style>

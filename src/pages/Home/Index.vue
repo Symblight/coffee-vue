@@ -10,7 +10,7 @@
             <router-link to="/drinks" class="item">
                 <h2>Напитки</h2>
                 <img src="https://globalassets.starbucks.com/assets/10f88951d9ce4fd4b6eec3f0be5516d2.jpg" />
-                <p>
+                <p class="paragraph">
                     Мы отбираем только самые лучшие зерна для Вашего напитка. 
                     Вот почему наши профессионалы тщательно работают с каждой партией кофе, добиваясь того, 
                     чтобы каждое зернышко достигло пика своей насыщенности. Бариста всегда готовы приготовить напиток по вашему желанию и мы хотим, 
@@ -21,7 +21,7 @@
             <router-link to="/foods" class="item">
                 <h2>Еда</h2>
                 <img src="https://globalassets.starbucks.com/assets/5c7c2bd2cdf240819e21a7596a37348f.jpg" />
-                <p>
+                <p class="paragraph">
                     Вы сказали нам, что для вас важна – натуральная, сытная и вкусная еда.
                     Поэтому мы изъяли искусственные ароматизаторы, искусственные красители и кукурузный сироп с высоким содержанием фруктозы из всего ассортимента нашей еды. 
                     Все, что вы едите у нас,
@@ -67,7 +67,7 @@ export default {
 .products {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     margin-top: 20px;
 }
 
@@ -77,5 +77,8 @@ export default {
     text-align: left;
     margin-right: 30px;
     cursor: pointer;
+}
+.paragraph {
+    line-height: 17px;
 }
 </style>
