@@ -1,15 +1,1 @@
-{
-    "users": [
-        {
-            "id": 1,
-            "first_name": "Ira",
-            "last_name": "Krylova",
-            "middle_name": null,
-            "username": "Krylova",
-            "password": "Krylova",
-            "adress": "Minsk",
-            "accumulationСardProcent" : 10,
-            "accumulationTotal": 0
-        }
-    ]
-}
+{"users":[{"id":"1","firstName":"Ira","lastName":"Krylova","username":"Krylova","password":"Krylova","adress":"Minsk","accumulationСardProcent":10,"accumulationTotal":0},{"username":"symb","password":"123","lastName":"Tkachenko","firstName":"Aleksey","adress":"Лелевеля 19","accumulationСardProcent":10,"accumulationTotal":0,"id":"ee308d92dc83efab95578db1983f36b4"}]}

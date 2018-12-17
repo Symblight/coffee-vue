@@ -1,11 +1,14 @@
 var express = require('express'),
 	router = express.Router(),
 	jwt = require('jsonwebtoken'),
- 	bcrypt = require('bcryptjs'),
+	fs = require('fs'),
+	crypto = require('crypto'),
+	path = require('path'),
     drinksJSON = require("../data/drinks.json"),
     foodsJSON = require("../data/foods.json"),
 	usersJSON = require("../data/users.json");
 
+var secret = "coffeemylife";
 
 router.get("/drinks", function(req, res, next) {
 	return res.status(200).send({
@@ -26,7 +29,7 @@ router.get("/users", function(req, res, next) {
 });
 
 router.get("/user/:id", function(req, res, next) { // get profile
-	const userId = Number(req.params.id);
+	const userId = req.params.id;
 	const users = usersJSON.users;
 
 	const user = users.find(function(user) {
@@ -49,10 +52,42 @@ router.put("/user", function(req, res, next) { // update procent
 });
 
 router.post("/signup", function(req, res, next) {
-	console.log(req.body);
-	var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-	
-	return res.status(201);
+	const userList = usersJSON.users;
+
+	const data = req.body.user;
+
+	const findUser = userList.find(function(user) {
+		return user.username === data.username;
+	});
+
+	if (!findUser) {
+		const user = Object.assign(data, {
+			accumulationСardProcent: 10,
+			accumulationTotal: 0,
+			id: crypto.createHash('md5').update(JSON.stringify(data)).digest("hex")
+		});
+
+		userList.push(user);
+
+		const newUsersJSON = JSON.stringify({users: userList});  
+
+		fs.writeFileSync(path.resolve(__dirname,"../data/users.json"), newUsersJSON); 
+
+		var token = jwt.sign({
+			user
+		}, secret, { expiresIn: 60 * 60 });
+		
+		return res.status(201).send({
+			data: {
+				user,
+				token
+			}
+		});
+	} else {
+		return res.status(400).send({
+			error: "Username is exists"
+		});
+	}
 });
 
 router.post("/login", function(req, res, next) {
@@ -72,7 +107,7 @@ router.post("/login", function(req, res, next) {
 
 	var token = jwt.sign({
 		user
-	}, 'coffeemylife', { expiresIn: 60 * 60 });
+	}, secret, { expiresIn: 60 * 60 });
 
 
 	return res.status(200).send({

@@ -4,11 +4,11 @@
         <section class="content">
             <aside class="field">
                 <div class="field-name">First name:</div> 
-                <span class="field-value">{{user.first_name}}</span>
+                <span class="field-value">{{user.firstName}}</span>
             </aside>
             <aside class="field">
                 <div class="field-name">Last name:</div>
-                <span class="field-value">{{user.last_name}}</span>
+                <span class="field-value">{{user.lastName}}</span>
             </aside>
             <aside class="field">
                 <div class="field-name">Username:</div>
@@ -33,9 +33,8 @@ export default {
     data() {
         return {
             user: {
-                first_name: null,
-                last_name: null,
-                middle_name: null,
+                firstName: null,
+                lastName: null,
                 username: null,
                 adress: null,
             }
