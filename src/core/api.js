@@ -9,8 +9,21 @@ export const login = (data) => {
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
        
         xhr.onreadystatechange = function() {//Call a function when the state changes.
-            resolve(xhr.response);
-        }
+            if (this.status >= 200 && this.status < 300) {
+                resolve(JSON.parse(xhr.response));
+              } else {
+                reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+                });
+              }
+            };
+            xhr.onerror = function () {
+              reject({
+                status: this.status,
+                statusText: xhr.statusText
+              });
+            };
 
         xhr.send(params);
     })

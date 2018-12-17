@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import {getToken} from '../utils/local'
+
 import Home from '../pages/Home'
 import Drinks from '../pages/Drinks'
 import Foods from '../pages/Foods'
@@ -12,6 +14,22 @@ import SignUp from '../pages/SignUp'
 import NotFound from '../pages/NotFound.vue'
 
 Vue.use(VueRouter)
+
+const ifNotAuthenticated = (to, from, next) => {
+    if (!getToken()) {
+      next()
+      return
+    }
+    next('/')
+}
+  
+const ifAuthenticated = (to, from, next) => {
+    if (getToken()) {
+      next()
+      return
+    }
+    next('/login')
+}
 
 export default new VueRouter({
     mode: 'history',
@@ -39,16 +57,19 @@ export default new VueRouter({
         },
         {
             path: '/login',
-            component: Login
+            component: Login,
+            beforeEnter: ifNotAuthenticated,
         },
         {
             path: '/signup',
-            component: SignUp
+            component: SignUp,
+            beforeEnter: ifNotAuthenticated,
         },
         {
             path: '/profile/:id',
             component: Profile,
-            props: true
+            props: true,
+            beforeEnter: ifAuthenticated,
         },
         {
             path: '*',

@@ -28,12 +28,21 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="buttons">
+                    <div class="buttons" v-if="isNotAuth">
                         <router-link to="/signup" class="button is-primary">
                             <strong>Регистрация</strong>
                         </router-link>
                         <router-link to="/login" class="button is-light">
                             Войти
+                        </router-link>
+                    </div>
+                    <div class="buttons" v-if="isAuth">
+                        <router-link to="/profile/1" class="button is-primary">
+                            <strong>Профиль</strong>
+                        </router-link>
+
+                        <router-link to="/" class="button is-danger">
+                            <strong v-on:click="logout()">Выйти</strong>
                         </router-link>
                     </div>
                 </div>
@@ -47,12 +56,25 @@ import Coffee from '../assets/icons/coffee.svg'
 import Doughnut from '../assets/icons/doughnut.svg'
 import Breakfast from '../assets/icons/breakfast.svg'
 
+import {getToken, getUser, clearCred} from '../utils/local'
+
 export default {
     name: 'Header',
     data() {
         return {
-            coffee: Coffee
+            coffee: Coffee,
+            user: getUser()
         }
+    },
+    methods: {
+        logout: () => {
+            console.log(1111)
+            clearCred()
+        }
+    },
+    computed: {
+        isNotAuth: () => !getToken(),
+        isAuth: () => getToken()
     }
 }
 </script>

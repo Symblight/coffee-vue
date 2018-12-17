@@ -38,7 +38,8 @@
 </template>
 
 <script>
-import { login } from "../../core/api";
+import { login } from "../../core/api"
+import { setToken, setUser } from '../../utils/local'
 
     export default {
         name: 'Login',
@@ -58,9 +59,14 @@ import { login } from "../../core/api";
                 }
 
                 login(user)
-                    .then(data => {
-                        console.log(data);
-                })
+                    .then(res => {
+                         setToken(res.data.token);
+                         setUser(res.data.user);
+                         this.$router.push(`profile/${res.data.user.id}`)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
             },
         }
     }

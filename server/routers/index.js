@@ -56,16 +56,31 @@ router.post("/signup", function(req, res, next) {
 });
 
 router.post("/login", function(req, res, next) {
-	// if(!user) {
-	// 	return res.status(400),send({
-	// 		error: "Missing password or username"
-	// 	});
-	// }
+	var userAuth = req.body;
 
-	// return res.status(200),send({
-	// 	data: user
-	// });
-	return res.status(200);
+	const users = usersJSON.users;
+
+	const user = users.find(function(user) {
+		return user.username === userAuth.username && user.password === userAuth.password ;
+	});
+
+	if(!user) {
+		return res.status(404).send({
+			error: "Missing user"
+		});
+	}
+
+	var token = jwt.sign({
+		user
+	}, 'coffeemylife', { expiresIn: 60 * 60 });
+
+
+	return res.status(200).send({
+		data: {
+			token: token,
+			user: user
+		}
+	});
 });
 
 module.exports = router;

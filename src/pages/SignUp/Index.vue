@@ -90,7 +90,7 @@ export default {
 
 <style lang="scss" scoped>
  .form{
-     width:400px;
+     width: 400px;
      margin: auto;
  }
 </style>

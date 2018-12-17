@@ -1,9 +1,26 @@
 <template>
-    <div>
-        Profile
-        <strong>Name: {{user.first_name}}</strong>
-        <strong>Last name: {{user.last_name}}</strong>
-        <strong>adress: {{user.adress}}</strong>
+    <div class="section">
+        <div class="ava">IK</div>
+        <section class="content">
+            <aside class="field">
+                <div class="field-name">First name:</div> 
+                <span class="field-value">{{user.first_name}}</span>
+            </aside>
+            <aside class="field">
+                <div class="field-name">Last name:</div>
+                <span class="field-value">{{user.last_name}}</span>
+            </aside>
+            <aside class="field">
+                <div class="field-name">Username:</div>
+                <span class="field-value">{{user.username}}</span>
+            </aside>
+            <aside class="field">
+                <div class="field-name">Adress:</div>
+                <span class="field-value">{{user.adress}}</span>
+            </aside>
+            <div>Карта: 10%</div>
+            <div>Накопительная сумма: 0 рублей</div>
+        </section>
     </div>
 </template>
 
@@ -37,3 +54,44 @@ export default {
     },
 }
 </script>
+
+<style lang="scss" scoped>
+ .section {
+    width: 400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+ .content {
+     display: flex;
+     flex-direction: column;
+     margin-top: 22px;
+     width: 100%;
+ }
+ .ava {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 52px;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-color: #00d1b2;
+    color: #fff;
+ }
+
+ .field {
+     display: flex;
+     width: 100%;
+ }
+
+ .field-name {
+     width: 30%;
+     font-weight: 700;
+ }
+
+ .field-value {
+     width: 70%;
+ }
+</style>

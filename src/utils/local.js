@@ -1,13 +1,10 @@
 export const getToken = () => {
-    return false;
+    return localStorage.getItem('token');
 }
 
 export const setToken = (data) => {
     // set token to local storage
-}
-
-export const clearToken = () => {
-    // clear token
+    localStorage.setItem('token', data);
 }
 
 export const setOrder = (data) => {
@@ -20,4 +17,17 @@ export const getOrder = () => {
 
 export const clearOrder = () => {
     // clear orde from local storage
+}
+
+export const getUser = () => {
+    return localStorage.getItem('user');
+}
+
+export const setUser = (data) => {
+    localStorage.setItem('user', data);
+}
+
+export const clearCred = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
 }
