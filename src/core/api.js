@@ -33,7 +33,6 @@ export const signUp = (data) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
         const url = "http://localhost:5000/api/signup";
-        const params =`user=${data}`;
         
         xhr.open("POST", url, true); 
 
@@ -63,10 +62,13 @@ export const signUp = (data) => {
 export const getUser = (id) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = `http://localhost:5000/api/user/${id}`;
+        const url = `http://localhost:5000/api/user`;
+        
+        xhr.open("POST", url, true); 
 
-        xhr.open("GET", url, true);
-        xhr.onload = function() {
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
             if (this.status >= 200 && this.status < 300) {
                 resolve(JSON.parse(xhr.response));
               } else {
@@ -80,9 +82,10 @@ export const getUser = (id) => {
               reject({
                 status: this.status,
                 statusText: xhr.statusText
-              });
-            };
-        xhr.send();
+            });
+        }
+
+        xhr.send(JSON.stringify({userId: id}));
     })
 }
 

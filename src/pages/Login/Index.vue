@@ -43,6 +43,7 @@ import { setToken, setUser } from '../../utils/local'
 
     export default {
         name: 'Login',
+        event: ['setAuth'],
         data(){
             return {
                 username: '',
@@ -51,7 +52,7 @@ import { setToken, setUser } from '../../utils/local'
         },
         methods: {
             onSubmit(event) {
-                event.preventDefault()
+                event.preventDefault();
 
                 const user = {
                     username: this.username,
@@ -62,7 +63,8 @@ import { setToken, setUser } from '../../utils/local'
                     .then(res => {
                          setToken(res.data.token);
                          setUser(res.data.user);
-                         this.$router.push(`profile/${res.data.user.id}`)
+                         this.$emit('setauth');
+                         this.$router.push("profile/");
                     })
                     .catch(err => {
                         console.log(err);

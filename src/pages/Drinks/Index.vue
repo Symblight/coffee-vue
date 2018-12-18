@@ -1,6 +1,6 @@
 <template>
     <div class="menu">
-        <Product v-for="drink in drinks" :key="drink.id" v-bind:data="drink"></Product>
+        <Product v-for="drink in drinks" :key="drink.id" v-bind:data="drink" @setproduct="setProduct(drink)"></Product>
     </div>
 </template>
 
@@ -8,13 +8,18 @@
 import Product from '../../components/Product'
 
 import { getDrinks } from "../../core/api";
-import { store } from '../../core/store'
 
 export default {
     name: 'Drinks',
+    event: ['setproduct'],
     data() {
         return {
             drinks: []
+        }
+    },
+    methods: {
+        setProduct(drink) {
+            this.$emit('setproduct', drink)
         }
     },
     mounted: function () {

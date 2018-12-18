@@ -6,7 +6,7 @@
                 <strong>{{data.name}}</strong>
                 <span>Стоимость: {{data.price}}р</span>
             </div>
-            <p>Количество: 0</p>
+            <p>Количество: {{data.count}}</p>
         </div>
         <div class="action">
             <i class="material-icons" v-on:click="$emit('onremove', data.id)">delete</i>

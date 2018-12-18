@@ -2,51 +2,36 @@
     <div class="container">
         <h1>Заказ:</h1>
         <div class="menu">
-            <ProductOrder v-for="product in order" :key="product.id" v-bind:data="product" @onRemove="onRemove"></ProductOrder>
+            <ProductOrder v-for="product in order" :key="product.id" v-bind:data="product" @onRemove="onRemoveProduct"></ProductOrder>
         </div>
-        <div>Количество товаров: {{countProducts}}</div>
-        <div>Сумма: {{totalCost}}</div>
+        <div>Количество товаров:</div>
+        <div>Сумма:</div>
         <button class="button is-success" v-on:click="onOrder">Заказать</button>
         <button class="button" v-on:click="onClear">Очистить заказ</button>
     </div>
 </template>
 
 <script>
-import { store } from '../../core/store'
 import ProductOrder from '../../components/ProductOrder'
 
 export default {
     name: 'Order',
-    data() {
-        return {
-            order: store.state.order
-        }
-    },
-    methods: {
-        onClear() {
-            this.order = []
-        },
-        onOrder() {
-          //  store.setOrder()
-         // this.clearOrder()
-         this.order = []
-        },
-        onRemove(id) {
-         //   store.removeProduct(id)
-         this.order = this.order.filter(product => product.id !== id)
-        }
-    },
+    props: ["order"],
+    event: ['clearorder', 'setorder', 'removeproduct'],
     components: {
         ProductOrder
     },
-    computed: {
-        countProducts() {
-            return this.order.length
+    methods: {
+        onClear() {
+            this.$emit('clearorder')
         },
-        totalCost() {
-            return this.order.map(product => product.price)
-        }
-    },
+        onOrder() {
+            this.$emit('setorder')
+        },
+        onRemoveProduct(id) {
+            this.$emit('removeproduct', id)
+        },
+    }
 }
 </script>
 

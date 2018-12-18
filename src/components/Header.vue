@@ -28,7 +28,7 @@
 
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="buttons" v-if="isNotAuth">
+                    <div class="buttons" v-if="!auth">
                         <router-link to="/signup" class="button is-primary">
                             <strong>Регистрация</strong>
                         </router-link>
@@ -36,8 +36,8 @@
                             Войти
                         </router-link>
                     </div>
-                    <div class="buttons" v-if="isAuth">
-                        <router-link to="/profile/1" class="button is-primary">
+                    <div class="buttons" v-if="auth">
+                        <router-link to="/profile" class="button is-primary">
                             <strong>Профиль</strong>
                         </router-link>
 
@@ -57,24 +57,23 @@ import Doughnut from '../assets/icons/doughnut.svg'
 import Breakfast from '../assets/icons/breakfast.svg'
 
 import {getToken, getUser, clearCred} from '../utils/local'
+import { store }  from '../core/store'
 
 export default {
     name: 'Header',
+    props: ['auth'],
+    event: ['setAuth'],
     data() {
         return {
             coffee: Coffee,
-            user: getUser()
+            user: getUser(),
         }
     },
     methods: {
-        logout: () => {
-            console.log(1111)
-            clearCred()
+        logout() {
+            clearCred();
+            this.$emit('setauth');
         }
-    },
-    computed: {
-        isNotAuth: () => !getToken(),
-        isAuth: () => getToken()
     }
 }
 </script>

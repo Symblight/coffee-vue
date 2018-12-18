@@ -20,11 +20,11 @@ export const clearOrder = () => {
 }
 
 export const getUser = () => {
-    return localStorage.getItem('user');
+    return JSON.parse(localStorage.getItem('user'));
 }
 
 export const setUser = (data) => {
-    localStorage.setItem('user', data);
+    localStorage.setItem('user', JSON.stringify(data));
 }
 
 export const clearCred = () => {

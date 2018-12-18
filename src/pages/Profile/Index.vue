@@ -25,11 +25,11 @@
 </template>
 
 <script>
-import { getUser } from "../../core/api";
+import { getUser } from "../../core/api"
+import { getUser as getFromLocalUser} from "../../utils/local"
 
 export default {
     name: 'Profile',
-    props: ['id'],
     data() {
         return {
             user: {
@@ -42,7 +42,8 @@ export default {
     },
     mounted: function () {
         this.$nextTick(function () {
-            getUser(this.id)
+            const user = getFromLocalUser();
+            getUser(user.id)
                 .then((user) => {
                     this.user = user.data
                 })

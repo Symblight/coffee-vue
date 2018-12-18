@@ -5,6 +5,11 @@ export const store = {
         drinks,
         foods,
         order: [],
+        auth: false,
+    },
+    setAuth() {
+        console.log(this.state.auth)
+        this.state.auth = !this.state.auth;
     },
     setProductToOrder(product) {
         console.log('set product!')

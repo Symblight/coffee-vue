@@ -28,8 +28,8 @@ router.get("/users", function(req, res, next) {
 	});
 });
 
-router.get("/user/:id", function(req, res, next) { // get profile
-	const userId = req.params.id;
+router.post("/user", function(req, res, next) { // get profile
+	const userId = req.body.userId;
 	const users = usersJSON.users;
 
 	const user = users.find(function(user) {

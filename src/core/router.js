@@ -66,9 +66,8 @@ export default new VueRouter({
             beforeEnter: ifNotAuthenticated,
         },
         {
-            path: '/profile/:id',
+            path: '/profile',
             component: Profile,
-            props: true,
             beforeEnter: ifAuthenticated,
         },
         {
