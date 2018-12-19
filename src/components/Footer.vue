@@ -12,3 +12,12 @@ export default {
     name: 'Footer'
 }
 </script>
+
+<style lang="scss" scoped>
+    .footer {
+        background-color: #bb9675;
+        padding: 3rem 1.5rem 6rem;
+        color: #fff;
+    }
+</style>
+

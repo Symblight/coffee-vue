@@ -3,14 +3,19 @@
         <Header v-bind:auth="auth" v-on:setauth="setAuth()"></Header>
         <section class="content container">
             <router-view 
-                v-on:setauth="setAuth()"
-                v-on:setproduct="setProduct"
-                v-bind:order="order"
+                @setauth="setAuth()"
+
+                @setproduct="setProduct"
                 @clearorder="clearOrder"
                 @setorder="setOrder"
+    
                 @removeproduct="removeProduct"
+                @addproduct="addProduct"
+                @clearproduct="clearProduct"
+
+                v-bind:order="order"
             ></router-view>
-            <router-link to="/order" class="order">Order</router-link>
+            <OrderBlock :count="order.count"></OrderBlock>
         </section>
         <Footer />
     </div>
@@ -20,36 +25,47 @@
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Home from '../pages/Home'
+import OrderBlock from '../components/Order'
 
 import { store }  from '../core/store'
 import { getUser } from "./api"
-import { getUser as getFromLocalUser} from "../utils/local"
+import { getUser as getFromLocalUser } from "../utils/local"
 
 export default {
     name: 'App',
     data() {
         return {
             auth: false,
-            order: []
+            order: {
+                products: [],
+                count: 0,
+                total: 0
+            }
         }
     },
     components: {
-        Header, Footer
+        Header, Footer, OrderBlock
     },
     methods: {
          setAuth() {
             this.auth = !this.auth;
         },
         setProduct(product) {
-            const findProduct = this.order.find((prod) => product.id === prod.id)
+            const findProduct = this.order.products.find((prod) => product.id === prod.id)
 
             if (findProduct) {
-                product.count = findProduct.count + 1
-                 //
+                const index = this.order.products.indexOf(product)
+                this.order.products[index] = {
+                    ...product, 
+                    count: ++findProduct.count
+                }
             } else {
                 product.count = 1;
-                this.order.push(product)
+                this.order.products.push(product)
             }
+
+            this.order.count++
+            this.order.total += product.price
         },
         setOrder() {
             console.log('set order!')
@@ -57,12 +73,26 @@ export default {
         },
         clearOrder() {
             console.log('clear!')
-            this.order = []
+            this.order.products = []
+            this.order.count = 0
+            this.order.total  = 0
         },
         removeProduct(id) {
             console.log('remove!', id)
-            this.order = this.order.filter(product => product.id !== id)
-        }
+            const product = this.order.products.find(product => product.id === id)
+
+            console.log(product)
+           // this.order.products = this.order.products.filter(product => product.id !== id)
+           // this.order.count--
+
+           // this.order.total -= product.price
+        },
+        addProduct(product) {
+            console.log("add product")
+        },
+        clearProduct() {
+            console.log("clear")
+        },
     },
     mounted () {
         const user = getFromLocalUser();
@@ -85,18 +115,5 @@ export default {
     min-height: 100vh;
     flex-direction: column;
     z-index: 1000;
-}
-
-.order { 
-    width: 70px;
-    height: 70px;
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 18px;
-    background-color: #00d1b2;
-    padding: 12px;
 }
 </style>

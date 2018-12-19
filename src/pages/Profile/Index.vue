@@ -18,8 +18,8 @@
                 <div class="field-name">Adress:</div>
                 <span class="field-value">{{user.adress}}</span>
             </aside>
-            <div>Карта: 10%</div>
-            <div>Накопительная сумма: 0 рублей</div>
+            <div>Карта: {{user.accumulationСardProcent}}%</div>
+            <div>Накопительная сумма: {{user.accumulationTotal}} рублей</div>
         </section>
     </div>
 </template>
@@ -37,6 +37,8 @@ export default {
                 lastName: null,
                 username: null,
                 adress: null,
+                accumulationСardProcent: 0,
+                accumulationTotal: 0
             }
         }
     },
