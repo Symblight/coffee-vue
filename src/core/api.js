@@ -1,7 +1,9 @@
+const api = window._config.apiUrl;
+
 export const login = (data) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = "http://localhost:5000/api/login";
+        const url = `${api}/api/login`;
         const params =`username=${data.username}&password=${data.password}`;  
 
         xhr.open("POST", url, true); 
@@ -32,7 +34,7 @@ export const login = (data) => {
 export const signUp = (data) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = "http://localhost:5000/api/signup";
+        const url = `${api}/api/signup`;
         
         xhr.open("POST", url, true); 
 
@@ -62,7 +64,7 @@ export const signUp = (data) => {
 export const getUser = (id) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = `http://localhost:5000/api/user`;
+        const url = `${api}/api/user`;
         
         xhr.open("POST", url, true); 
 
@@ -92,7 +94,7 @@ export const getUser = (id) => {
 export const getDrinks = () => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = "http://localhost:5000/api/drinks";
+        const url = `${api}/api/drinks`;
 
         xhr.open("GET", url, true);
         xhr.onload = function(){
@@ -105,7 +107,7 @@ export const getDrinks = () => {
 export const getFoods = () => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = "http://localhost:5000/api/foods";
+        const url = `${api}/api/foods`;
 
         xhr.open("GET", url, true);
         xhr.onload = function(){
@@ -118,7 +120,7 @@ export const getFoods = () => {
 export const updateOrderUser = (data) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = `http://localhost:5000/api/order`;
+        const url = `${api}/api/order`;
         
         xhr.open("PUT", url, true); 
 
@@ -151,7 +153,7 @@ export const updateOrderUser = (data) => {
 export const updateOrderUserSale = (data) => {
     return new Promise((resolve, reject) =>{
         const xhr = new XMLHttpRequest();
-        const url = `http://localhost:5000/api/order/sale`;
+        const url = `${api}/api/order/sale`;
         
         xhr.open("PUT", url, true); 
 

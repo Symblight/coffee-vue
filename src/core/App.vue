@@ -18,8 +18,10 @@
                 :messages="messages"
             ></router-view>
             <OrderBlock :count="order.count"></OrderBlock>
+            <Modal :openmodal="modal" @closeModal="closeModal" @setorder="setOrderModal"> </Modal>
         </section>
         <Footer />
+        
     </div>
 </template>
 
@@ -28,16 +30,23 @@ import Header from '../components/Header.vue'
 import Footer from '../components/Footer.vue'
 import Home from '../pages/Home'
 import OrderBlock from '../components/Order'
+import Modal from '../components/Modal'
 
 import { store }  from '../core/store'
 import { updateOrderUser, updateOrderUserSale } from "./api"
-import { getUser as getFromLocalUser } from "../utils/local"
+import { 
+    getUser as getFromLocalUser,
+    getOrder as getOrderLocal,
+    setOrder as setOrderLocal,
+    clearOrder as clearOrderLocal
+ } from "../utils/local"
 
 export default {
     name: 'App',
     data() {
         return {
             auth: false,
+            modal: false,
             order: {
                 products: [],
                 count: 0,
@@ -50,7 +59,7 @@ export default {
         }
     },
     components: {
-        Header, Footer, OrderBlock
+        Header, Footer, OrderBlock, Modal
     },
     methods: {
          setAuth() {
@@ -72,24 +81,35 @@ export default {
 
             this.order.count++
             this.order.total += product.price
+
+            setOrderLocal(this.order)
         },
         setOrder() {
             const user = getFromLocalUser();
-            const data = {
-                order: this.order,
-                user: user.id
-            }
             if(this.order.total > 0) {
-                updateOrderUser(data)
-                    .then((json) => {
-                        this.messages.text = json.message
-                        this.clearOrder()
-                    })
-                    .catch(err => {
-                        console.log(err)
-                        this.messages.error = err.message
-                    })
+                if (user) {
+                    const data = {
+                        order: this.order,
+                        user: user.id
+                    }
+                    updateOrderUser(data)
+                        .then((json) => {
+                            this.messages.text = json.message
+                            this.clearOrder()
+                        })
+                        .catch(err => {
+                            console.log(err)
+                            this.messages.error = err.message
+                        })
+                } else {
+                    this.modal = true;
+                }
             }
+        },
+        setOrderModal() {
+            this.modal = false;
+            this.clearOrder()
+            this.messages.text = "Заказ выполнен!"
         },
         setOrderSale() {
             const user = getFromLocalUser();
@@ -97,7 +117,7 @@ export default {
                 order: this.order,
                 user: user.id
             }
-            if(this.order.total > 0) {
+            if(this.order.total > 0 && user) {
                 updateOrderUserSale(data)
                     .then((json) => {
                         this.messages.text = json.message
@@ -113,6 +133,8 @@ export default {
             this.order.products = []
             this.order.count = 0
             this.order.total  = 0
+
+            clearOrderLocal()
         },
         removeProduct(product) {
             if (product.count > 1) {
@@ -128,6 +150,7 @@ export default {
 
             this.order.count--
             this.order.total -= product.price
+            setOrderLocal(this.order)
         },
         addProduct(product) {
             const findProduct = this.order.products.find((prod) => product.id === prod.id)
@@ -139,13 +162,31 @@ export default {
 
             this.order.count++
             this.order.total += product.price
+
+            setOrderLocal(this.order)
         },
         clearProduct(id) {
+            const findProduct = this.order.products.find((prod) => prod.id === id)
+            const index = this.order.products.indexOf(findProduct)
+
             this.order.products = this.order.products.filter(product => product.id !== id)
+
+            this.order.count -= findProduct.count
+            this.order.total -= findProduct.price
+
+            setOrderLocal(this.order)
         },
+        closeModal() {
+            this.modal = false
+        }
     },
     mounted () {
         const user = getFromLocalUser();
+        const order = getOrderLocal();
+
+        if (order) {
+            this.order = order
+        }
 
         if(user) {
             this.auth = !!user

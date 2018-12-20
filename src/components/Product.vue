@@ -48,22 +48,18 @@ export default {
     align-items: stretch;
     overflow: hidden;
     display: flex;
-    max-width: 960px;
+    width: 300px;
 
     padding: 10px;
-
-    flex: 0 0 33.33%;
-    max-width: 33.33%;
 }
-
-.picture {
-    transition: all .35s;
-    width: 100%;
-}
-
 .grid-content {
     display: flex;
     flex-direction: column;
+    padding: 10px;
+}
+
+.picture {
+    flex: 1;
 }
 
 .info {
@@ -72,6 +68,21 @@ export default {
 
 .section-item {
     background-color: #f2eae3;
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 1024px) { 
+    .grid-item {
+       // width: 300
+    }
+}
+
+@media screen and (min-width: 640px) {
+    .grid-item { 
+        // flex: 0 0 50%;
+        // max-width: 50%;
+    }
 }
 
 .scale-up-center {

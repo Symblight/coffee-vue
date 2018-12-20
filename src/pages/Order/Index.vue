@@ -70,9 +70,6 @@ export default {
         },
         onDeleteNotify() {
             this.messages.text = null
-        },
-        getUserOrder() {
-            console.log(1111)
         }
     },
     mounted() {

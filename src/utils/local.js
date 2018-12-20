@@ -8,15 +8,15 @@ export const setToken = (data) => {
 }
 
 export const setOrder = (data) => {
-    // set order to local storage
+    localStorage.setItem('order', JSON.stringify(data));
 }
 
 export const getOrder = () => {
-    // get order from local storage
+    return JSON.parse(localStorage.getItem('order'));
 }
 
 export const clearOrder = () => {
-    // clear orde from local storage
+    localStorage.removeItem('order');
 }
 
 export const getUser = () => {

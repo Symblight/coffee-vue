@@ -43,7 +43,10 @@ export default {
     .menu {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
+        flex-direction: row;
+        max-width: 960px;
+        margin: 0 auto;
     }
 </style>
 
