@@ -59,9 +59,19 @@ export default {
         cursor: pointer;
     }
 
+    .action {
+        display: flex;
+    }
     .image {
         flex-basis: 200px;
     }
+
+@media screen and (max-width: 640px) {
+    .info { 
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>
 
 

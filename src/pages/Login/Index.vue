@@ -1,5 +1,5 @@
 <template>
-    <form class="form">
+    <form class="form" v-on:keyup.enter="onSubmit">
         <h2>Авторизация</h2>
         <div class="field">
             <p class="control has-icons-left has-icons-right">
@@ -43,7 +43,7 @@ import { setToken, setUser } from '../../utils/local'
 
     export default {
         name: 'Login',
-        event: ['setAuth'],
+        event: ['setAuth', 'setnotify'],
         data(){
             return {
                 username: '',
@@ -67,7 +67,11 @@ import { setToken, setUser } from '../../utils/local'
                          this.$router.push("profile/");
                     })
                     .catch(err => {
-                        console.log(err);
+                        const messages = {
+                            value: '',
+                            error : err.text.error
+                        }
+                        this.$emit('setnotify', messages)
                     })
             },
         }
@@ -78,6 +82,7 @@ import { setToken, setUser } from '../../utils/local'
 <style lang="scss" scoped>
     .form {
         margin: auto;
-        width: 400px;
+        max-width: 400px;
+        width: 100%;
     }
 </style>

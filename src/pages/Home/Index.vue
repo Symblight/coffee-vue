@@ -3,14 +3,16 @@
         <div class="header-coffee ">
             <span class="label-hero">Think coffee</span>
             <div class="inline-video">
-                <!-- <img v-bind:src="require('../../assets/hero-product-lp-hot-drinks-1024x400.jpg')"/> -->
+                <img v-bind:src="require('../../assets/background.jpeg')" class="hero-img"/>
             </div>
         </div>
         <div class="header">
             <h1>Меню</h1>
             <h2>Вкусные напитки и великолепная еда. Секрет того, как сделать жизнь лучше.</h2>
-            <img src="http://www.starbucks.ru/media/meny_tcm84-11058_w1024_n.jpg"/>
-            <p>Идеальная чашка кофе и вкусная сытная закуска к ней могут поднять вам настроение на целый день. Поэтому мы стремимся к тому, чтобы все, что вы выбираете, было самого лучшего качества.</p>
+            <div>
+                <img src="http://www.starbucks.ru/media/meny_tcm84-11058_w1024_n.jpg"/>
+            </div>
+            <span class="header-paragraph">Идеальная чашка кофе и вкусная сытная закуска к ней могут поднять вам настроение на целый день. Поэтому мы стремимся к тому, чтобы все, что вы выбираете, было самого лучшего качества.</span>
         </div>
         <div class="products">
             <router-link to="/drinks" class="item">
@@ -41,7 +43,7 @@
 <script>
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
-import Img from '../../assets/hero-product-lp-hot-drinks-1024x400.jpg'
+import HeroImage from '../../assets/background.jpeg'
 
 export default {
     name: 'App',
@@ -80,12 +82,15 @@ export default {
     color: #fff;
     font-size: 27px;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .products {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -97,12 +102,73 @@ export default {
 
 .item {
     display: block;
-    width: 400px;
+    max-width: 400px;
     text-align: left;
     margin-right: 30px;
     cursor: pointer;
+    padding: 10px;
+    color: #000; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+
+.inline-video {
+    width: 100%;
+}
+
+.hero-img {
+    width: 100%;
+}
+
+.item:hover {
+  //  background-color: #ffeaa7;
+}
+    
 .paragraph {
     line-height: 17px;
+    margin-top: 20px;
+}
+
+.header-paragraph {
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 22px;
+}
+
+.header>h2 {
+    background-color: #bb9675;
+    color: white;
+    padding: 8px;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (max-width: 740px) {
+    .products { 
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header>h1 {
+        font-size: 18px;
+    }
+
+    .header>h2 {
+        font-size: 16px;
+    }
+    .header-paragraph {
+        font-size: 16px;
+    }
+    .item {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 12px;
+    }
 }
 </style>

@@ -2,7 +2,7 @@
     "drinks": [{
         "id": 1,
         "name": "Эспрессо",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/espresso/tiles/LP-promo-x1-espresso-620x506.jpg",
         "description": null,
         "price": 2.00,
         "volume": "30 мл"
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "name": "Латте",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/latte/tiles/LP-promo-x1-hot-latte-620x506.jpg",
         "description": null,
         "price": 3.50,
         "volume": "350 мл"
@@ -26,7 +26,7 @@
     {
         "id": 4,
         "name": "Раф-кофе",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/coffee/tiles/LP-promo-x2-hot-coffee-620x506.jpg",
         "description": null,
         "price": 4,
         "volume": "250 мл"
@@ -34,33 +34,26 @@
     {
         "id": 5,
         "name": "Американо",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/americano/tiles/LP-promo-x2-americano-620x506.jpg",
         "description": null,
         "price": 2.50,
         "volume": "110 мл"
     },
     {
         "id": 6,
-        "name": "Флэт‑уайт",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "name": "Горячий шоколад",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/hot-chocolate/tiles/LP-promo-x1-hot-chocolate-620x506.jpg",
         "description": null,
-        "price": 5,
+        "price": 2,
         "volume": "250 мл"
     },
     {
         "id": 7,
         "name": "Мокачино",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
+        "url": "https://www.dunkindonuts.com/content/dam/dd/img/products/hot-drinks/macchiato/tiles/LP-promo-x1-hot-macchiato-620x506.jpg",
         "description": null,
         "price": 4,
         "volume": "350 мл"
-    },
-    {
-        "id": 8,
-        "name": "Лонг блэк",
-        "url": "https://delonghi-shop.com.ua/modules/stock/thmb/chto_takoe_mokachino_i_kak_ego_gotovit.jpg",
-        "description": null,
-        "price": 4,
-        "volume": "110 мл"
-    }]
+    }
+    ]
 }

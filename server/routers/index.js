@@ -108,36 +108,44 @@ router.post("/signup", function(req, res, next) {
 
 	const data = req.body.user;
 
-	const findUser = userList.find(function(user) {
-		return user.username === data.username;
-	});
+	if (data.password && data.username && data.firstName && data.lastName) {
 
-	if (!findUser) {
-		const user = Object.assign(data, {
-			accumulationСardProcent: 10,
-			accumulationTotal: 0,
-			id: crypto.createHash('md5').update(JSON.stringify(data)).digest("hex")
+		const findUser = userList.find(function(user) {
+			return user.username.toLowerCase() === data.username.toLowerCase();
 		});
 
-		userList.push(user);
+		if (!findUser) {
+			const user = Object.assign(data, {
+				password: crypto.createHash('md5').update(data.password).digest("hex"),
+				accumulationСardProcent: 10,
+				accumulationTotal: 0,
+				id: crypto.createHash('md5').update(JSON.stringify(data)).digest("hex")
+			});
 
-		const newUsersJSON = JSON.stringify({users: userList});  
+			userList.push(user);
 
-		fs.writeFileSync(path.resolve(__dirname,"../data/users.json"), newUsersJSON); 
+			const newUsersJSON = JSON.stringify({users: userList});  
 
-		var token = jwt.sign({
-			user
-		}, secret, { expiresIn: 60 * 60 });
-		
-		return res.status(201).send({
-			data: {
-				user,
-				token
-			}
-		});
+			fs.writeFileSync(path.resolve(__dirname,"../data/users.json"), newUsersJSON); 
+
+			var token = jwt.sign({
+				user
+			}, secret, { expiresIn: 60 * 60 });
+			
+			return res.status(201).send({
+				data: {
+					user,
+					token
+				}
+			});
+		} else {
+			return res.status(400).send({
+				error: "Username is exists"
+			});
+		}
 	} else {
 		return res.status(400).send({
-			error: "Username is exists"
+			error: "Missing validation"
 		});
 	}
 });
@@ -148,7 +156,7 @@ router.post("/login", function(req, res, next) {
 	const users = usersJSON.users;
 
 	const user = users.find(function(user) {
-		return user.username === userAuth.username && user.password === userAuth.password ;
+		return user.username.toLowerCase() === userAuth.username.toLowerCase() && user.password === crypto.createHash('md5').update(userAuth.password).digest("hex");
 	});
 
 	if(!user) {

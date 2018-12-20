@@ -1,7 +1,25 @@
-Coffee
+# Coffee application Vue
 
-1) npm install
-2) npm run server
-3) npm run start
+## Start with Parcel:
 
-Web site will run: http://localhost:1234
+```bash
+npm install -g parcel-bundler
+```
+
+### Install project
+```bash
+npm install
+```
+
+### Run server
+
+```bash
+npm run server
+```
+
+### Run client
+```bash
+npm run start
+```
+
+Web site will be run: http://localhost:1234

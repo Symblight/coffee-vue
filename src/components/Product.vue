@@ -14,7 +14,7 @@
                 </div>
 
                 <div>
-                    <button v-if="!isActive" v-on:click="onProduct(data)" class="button is-primary">Взять</button>
+                    <button v-if="!isActive" v-on:click="onProduct(data)" class="button is-primary">Заказать</button>
                     <button v-if="isActive" v-on:click="onProduct(data)" class="button is-info">Еще?</button>
                     <span v-if="isActive" v-bind:class="[isActive ? 'scale-up-center': null]" class="tag is-link is-normal">В корзине</span>
                 </div>
@@ -58,10 +58,6 @@ export default {
     padding: 10px;
 }
 
-.picture {
-    flex: 1;
-}
-
 .info {
     display: flex;
 }
@@ -72,16 +68,35 @@ export default {
     flex-direction: column;
 }
 
-@media screen and (min-width: 1024px) { 
+@media screen and (max-width: 740px) { 
     .grid-item {
-       // width: 300
+        width: 100%;
+    }
+
+    .section-item  {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .picture {
+        width: 120px;
+        display: flex;
+        align-items: center;
+        margin-right: 10px;
+    }
+
+    .picture>img {
+        height: 120px;
+        width: 120px;
+        border-radius: 50%;
     }
 }
 
 @media screen and (min-width: 640px) {
-    .grid-item { 
-        // flex: 0 0 50%;
-        // max-width: 50%;
+    .picture { 
+        flex: 1;
     }
 }
 

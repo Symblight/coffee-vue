@@ -13,6 +13,12 @@
 <script>
 import Bag from '../assets/icons/coffee_bag.svg'
 
+const REJECT_URL = [
+        '/order',
+        '/login',
+        '/signup'
+];
+
 export default {
     name: 'OrderBlock',
     props: ['count'],
@@ -22,10 +28,18 @@ export default {
             isActive: true
         }
     },
-    watch: { 
-      	count: function(newVal, oldVal) { // watch it
-          console.log('Prop changed: ', newVal, ' | was: ', oldVal)
+    methods: {
+            checkUrl(path) {
+                 this.orderUrl = REJECT_URL.indexOf(path) !== 0
+            }
+    },
+    watch: {
+        '$route' (to, from) {
+                this.checkUrl(to.path)
         }
+    },
+    mounted() {
+        this.checkUrl(this.$route.path)
     }
 }
 </script>
@@ -59,6 +73,18 @@ export default {
     border-radius: 50px;
     text-align: center;
     color: #fff;
+}
+
+@media screen and (max-width: 640px) {
+    .order { 
+        width: 60px;
+        font-size: 14px;
+    }
+
+    .content {
+        border-radius: 4px;
+        padding: 2px;
+        }
 }
 
 .slide-in-fwd-center {

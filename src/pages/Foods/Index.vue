@@ -1,11 +1,16 @@
 <template>
-    <div class="menu">
-        <Product v-for="food in foods" :key="food.id" v-bind:data="food" @setproduct="setProduct(food)"></Product>
+    <div class="wrap">
+        <h1>Еда:</h1>
+        <CoffeeSpinner v-if="loading"></CoffeeSpinner>
+        <div class="menu" v-if="!loading">
+            <Product v-for="food in foods" :key="food.id" v-bind:data="food" @setproduct="setProduct(food)"></Product>
+        </div>
     </div>
 </template>
 
 <script>
 import Product from '../../components/Product'
+import CoffeeSpinner from '../../components/CoffeeSpinner'
 
 import { getFoods } from "../../core/api";
 
@@ -14,7 +19,8 @@ export default {
     event: ['setproduct'],
     data() {
         return {
-            foods: []
+            foods: [],
+            loading: true
         }
     },
     methods: {
@@ -23,12 +29,13 @@ export default {
         }
     },
     components: {
-        Product
+        Product, CoffeeSpinner
     },
     mounted: function () {
         this.$nextTick(function () {
             getFoods()
                 .then((foods) => {
+                    this.loading = false
                     this.foods = foods.data
                 })
                 .catch(err => {
@@ -40,6 +47,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .wrap {
+        width: 100%;
+    }
     .menu {
         display: flex;
         flex-wrap: wrap;

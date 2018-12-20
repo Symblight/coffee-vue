@@ -1,3 +1,4 @@
 window._config = {
-    apiUrl: 'https://474ef4ed.ngrok.io'
+    apiUrl: 'http://localhost:5000',
+    defaultApi: 'http://localhost:5000'
 }

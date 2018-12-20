@@ -1,40 +1,48 @@
 <template>
     <div class="section">
+        <CoffeeSpinner v-if="loading"></CoffeeSpinner>
+        <div v-if="!loading" class="section">
         <div class="ava">{{initials}}</div>
-        <section class="content">
-            <aside class="field">
-                <div class="field-name">First name:</div> 
-                <span class="field-value">{{user.firstName}}</span>
-            </aside>
-            <aside class="field">
-                <div class="field-name">Last name:</div>
-                <span class="field-value">{{user.lastName}}</span>
-            </aside>
-            <aside class="field">
-                <div class="field-name">Username:</div>
-                <span class="field-value">{{user.username}}</span>
-            </aside>
-            <aside class="field">
-                <div class="field-name">Adress:</div>
-                <span class="field-value">{{user.adress}}</span>
-            </aside>
-            <section class="card">
-                <div>Карта: {{user.accumulationСardProcent}}%</div>
-                <div>Накопительная сумма: {{user.accumulationTotal.toFixed(2)}} рублей</div>
+            <section class="content">
+                <aside class="field">
+                    <div class="field-name">Имя:</div> 
+                    <span class="field-value">{{user.firstName}}</span>
+                </aside>
+                <aside class="field">
+                    <div class="field-name">Фамилия:</div>
+                    <span class="field-value">{{user.lastName}}</span>
+                </aside>
+                <aside class="field">
+                    <div class="field-name">Логин:</div>
+                    <span class="field-value">{{user.username}}</span>
+                </aside>
+                <aside class="field">
+                    <div class="field-name">Адрес:</div>
+                    <span class="field-value">{{user.adress}}</span>
+                </aside>
+                <section class="card">
+                    <div>Карта: {{user.accumulationСardProcent}}%</div>
+                    <div>Накопительная сумма: {{user.accumulationTotal.toFixed(2)}} рублей</div>
+                </section>
             </section>
-        </section>
+        </div>
     </div>
 </template>
 
 <script>
 import { getUser } from "../../core/api"
 import { getUser as getFromLocalUser} from "../../utils/local"
+import CoffeeSpinner from '../../components/CoffeeSpinner'
 
 export default {
     name: 'Profile',
+    components: {
+        CoffeeSpinner
+    },
     data() {
         return {
             initials: '',
+            loading: true,
             user: {
                 firstName: null,
                 lastName: null,
@@ -64,6 +72,7 @@ export default {
             getUser(user.id)
                 .then((user) => {
                     this.user = user.data
+                    this.loading = false
                     this.onInitials(this.user.firstName + " " + this.user.lastName)
                 })
                 .catch(err => {
@@ -76,7 +85,7 @@ export default {
 
 <style lang="scss" scoped>
  .section {
-    width: 400px;
+    max-width: 400px;
     margin: auto;
     display: flex;
     flex-direction: column;

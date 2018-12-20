@@ -13,12 +13,13 @@
                 @removeproduct="removeProduct"
                 @addproduct="addProduct"
                 @clearproduct="clearProduct"
+                @setnotify="setNotify"
 
                 :order="order"
-                :messages="messages"
             ></router-view>
             <OrderBlock :count="order.count"></OrderBlock>
             <Modal :openmodal="modal" @closeModal="closeModal" @setorder="setOrderModal"> </Modal>
+            <Notify :messages="messages" @ondeletenotify="onDeleteNotify"></Notify>
         </section>
         <Footer />
         
@@ -31,6 +32,7 @@ import Footer from '../components/Footer.vue'
 import Home from '../pages/Home'
 import OrderBlock from '../components/Order'
 import Modal from '../components/Modal'
+import Notify from '../components/Notify'
 
 import { store }  from '../core/store'
 import { updateOrderUser, updateOrderUserSale } from "./api"
@@ -59,7 +61,7 @@ export default {
         }
     },
     components: {
-        Header, Footer, OrderBlock, Modal
+        Header, Footer, OrderBlock, Modal, Notify
     },
     methods: {
          setAuth() {
@@ -178,6 +180,15 @@ export default {
         },
         closeModal() {
             this.modal = false
+        },
+        setNotify(value) {
+            this.messages = value
+        },
+        onDeleteNotify() {
+            this.messages = {
+                error:'',
+                text: ''
+            }
         }
     },
     mounted () {
@@ -209,5 +220,12 @@ export default {
     min-height: 100vh;
     flex-direction: column;
     z-index: 1000;
+}
+
+@media screen and (max-width: 640px) {
+    .content {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
 }
 </style>

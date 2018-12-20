@@ -16,7 +16,8 @@ export const login = (data) => {
               } else {
                 reject({
                   status: this.status,
-                  statusText: xhr.statusText
+                  statusText: xhr.statusText,
+                  text: JSON.parse(xhr.responseText)
                 });
               }
             };
@@ -46,7 +47,8 @@ export const signUp = (data) => {
               } else {
                 reject({
                   status: this.status,
-                  statusText: xhr.statusText
+                  statusText: xhr.statusText,
+                  text: JSON.parse(xhr.responseText)
                 });
               }
             };
@@ -132,7 +134,8 @@ export const updateOrderUser = (data) => {
               } else {
                 reject({
                   status: this.status,
-                  statusText: xhr.statusText
+                  statusText: xhr.statusText,
+                  text: JSON.parse(xhr.responseText)
                 });
               }
             };
@@ -165,7 +168,8 @@ export const updateOrderUserSale = (data) => {
               } else {
                 reject({
                   status: this.status,
-                  statusText: xhr.statusText
+                  statusText: xhr.statusText,
+                  text: JSON.parse(xhr.responseText)
                 });
               }
             };

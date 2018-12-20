@@ -1,5 +1,5 @@
 <template>
-    <form class="form">
+    <form class="form" v-on:keyup.enter="onSubmit">>
         <h2>Регистрация</h2>
         <div class="field">
             <label class="label">Имя</label>
@@ -59,6 +59,8 @@ import { setToken, setUser } from '../../utils/local'
 
 export default {
     name: 'SignUp',
+    props: ["setauth", "messages"],
+    events: ["setnotify"],
     data(){
         return {
             username: '',
@@ -79,15 +81,21 @@ export default {
                     firstName: this.firstName,
                     adress: this.adress
                 }
+                let valid  = false
 
                 signUp(user)
                     .then(res => {
-                         setToken(res.data.token);
-                         setUser(res.data.user);
-                         this.$router.push(`profile/${res.data.user.id}`)
+                         setToken(res.data.token)
+                         setUser(res.data.user)
+                         this.$emit('setauth')
+                         this.$router.push(`profile`)
                     })
                     .catch(err => {
-                        console.log(err)
+                        const messages = {
+                            value: '',
+                            error : err.text.error
+                        }
+                        this.$emit('setnotify', messages)
                     })
             },
         }
@@ -96,7 +104,8 @@ export default {
 
 <style lang="scss" scoped>
  .form{
-     width: 400px;
+     max-width: 400px;
+     width: 100%;
      margin: auto;
  }
 </style>

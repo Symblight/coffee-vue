@@ -2,8 +2,18 @@
     <div class="grid-guest" v-if="openmodal">
         <div class="modal-wrap">
             <div class="content-modal">
-                Ваш адрес:
-                <input class="input is-medium" type="text" placeholder="Адрес">
+                <div class="field">
+                    <span>Имя:</span>
+                    <input class="input is-medium" type="text" placeholder="имя">
+                </div>
+                <div class="field">
+                    <span>Фамилия:</span>
+                    <input class="input is-medium" type="text" placeholder="фамилия">
+                </div>
+                <div class="field">
+                    <span>Ваш адрес:</span>
+                    <input class="input is-medium" type="text" placeholder="Адрес">
+                </div>
             </div>
             <div class="actions-modal">
                 <button class="button is-success" v-on:click="$emit('setorder')">Заказать</button>

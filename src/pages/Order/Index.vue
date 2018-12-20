@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-on:keyup.enter="onOrder">> 
         <h1>Заказ:</h1>
         <div class="menu">
             <ProductOrder 
@@ -15,23 +15,11 @@
         </div>
 
         <div>Количество товаров: {{order.count}} шт</div>
-        <div>Сумма: {{order.total}} рублей</div>
+        <div>Сумма: {{order.total.toFixed(2)}} рублей</div>
 
         <button class="button is-success" v-on:click="onOrder">Заказать</button>
         <button class="button" v-on:click="onClear">Очистить заказ</button>
         <button v-if="accumulationTotal" class="button is-info" v-on:click="onOrderSale">Заказать с накопительной суммы</button>
-
-        <div v-if="messages.text" class="notify">
-            <div class="notification is-primary">
-                <button class="delete" v-on:click="onDeleteNotify"></button>
-                {{messages.text}}
-            </div>
-            <div v-if="messages.error || error" class="notification is-danger">
-            <button class="delete"></button>
-                {{!error ? messages.error : error}}
-            </div>
-        </div>
-
     </div>
 </template>
 
@@ -48,7 +36,6 @@ export default {
     data() {
         return {
             accumulationTotal: 0,
-            error: ''
         }
     },
     components: {
@@ -65,12 +52,13 @@ export default {
             if (this.accumulationTotal >= this.order.total) {
                 this.$emit('setordersale')
             } else {
-                this.error = "Недостаточно суммы"
+                const messages = {
+                    value: '',
+                    error : 'Недостаточно суммы'
+                }
+                this.$emit('setnotify', messages)
             }
         },
-        onDeleteNotify() {
-            this.messages.text = null
-        }
     },
     mounted() {
         const user = getFromLocalUser();
@@ -80,7 +68,11 @@ export default {
                     this.accumulationTotal = user.data.accumulationTotal
                 })
                 .catch(err => {
-                    console.log(err)
+                    const messages = {
+                        value: '',
+                        error : err.text.error
+                    }
+                    this.$emit('setnotify', messages)
                 })
         }
     }
@@ -92,13 +84,6 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-    }
-    .notify {
-        position: fixed;
-        display: flex;
-        flex-direction: column;
-        bottom: 10;
-        left: 10;
     }
 </style>
 
