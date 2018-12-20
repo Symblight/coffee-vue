@@ -9,13 +9,13 @@
             <p>Количество: {{data.count}}</p>
         </div>
         <div class="action">
-            <i class="material-icons"  v-on:click="$emit('addproduct', data)">
+            <i class="material-icons"  v-on:click="$emit('onadd', data)">
                 add
             </i>
             <i class="material-icons"  v-on:click="$emit('onremove', data.id)">
                 remove
             </i>
-            <i class="material-icons" v-on:click="$emit('clearproduct', data.id)">delete</i>
+            <i class="material-icons" v-on:click="$emit('onclear', data.id)">delete</i>
         </div>
     </div>
 </template>
@@ -24,7 +24,7 @@
 export default {
     name: 'ProductOrder',
     props: ['data'],
-    events: ['addproduct', 'clearproduct', 'removeproduct']
+    events: ['onadd', 'onclear', 'onremove']
 }
 </script>
 

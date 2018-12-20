@@ -3,7 +3,7 @@
         <div class="content" v-if="orderUrl">
             <div class="ic" v-html="require(`../assets/icons/coffee_bag.svg`)"></div>
             Ваш заказ
-            <div class="count" v-if="count">
+            <div class="count" v-if="count" v-bind:class="[count > 2 ? 'slide-in-fwd-center': null]">
                 {{count}}
             </div>
         </div>
@@ -18,7 +18,13 @@ export default {
     props: ['count'],
     data() {
         return {
-            orderUrl: true
+            orderUrl: true,
+            isActive: true
+        }
+    },
+    watch: { 
+      	count: function(newVal, oldVal) { // watch it
+          console.log('Prop changed: ', newVal, ' | was: ', oldVal)
         }
     }
 }
@@ -53,6 +59,11 @@ export default {
     border-radius: 50px;
     text-align: center;
     color: #fff;
+}
+
+.slide-in-fwd-center {
+	-webkit-animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .bounce-top {
@@ -163,6 +174,32 @@ export default {
     opacity: 1;
   }
 }
+
+@-webkit-keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
 
 </style>
 

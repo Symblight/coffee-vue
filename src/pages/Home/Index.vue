@@ -1,5 +1,11 @@
 <template>
     <div class="menu container">
+        <div class="header-coffee ">
+            <span class="label-hero">Think coffee</span>
+            <div class="inline-video">
+                <!-- <img v-bind:src="require('../../assets/hero-product-lp-hot-drinks-1024x400.jpg')"/> -->
+            </div>
+        </div>
         <div class="header">
             <h1>Меню</h1>
             <h2>Вкусные напитки и великолепная еда. Секрет того, как сделать жизнь лучше.</h2>
@@ -35,6 +41,7 @@
 <script>
 import Header from '../../components/Header.vue'
 import Footer from '../../components/Footer.vue'
+import Img from '../../assets/hero-product-lp-hot-drinks-1024x400.jpg'
 
 export default {
     name: 'App',
@@ -64,11 +71,28 @@ export default {
     width: 100%;
 }
 
+.header-coffee {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    background-color: #00d1b2;
+    display: flex;
+    color: #fff;
+    font-size: 27px;
+    font-weight: 700;
+}
+
 .products {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+.label-hero {
+    position: absolute;
+    left: 10px;
+    top: 10px;
 }
 
 .item {

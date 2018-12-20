@@ -8,12 +8,14 @@
                 @setproduct="setProduct"
                 @clearorder="clearOrder"
                 @setorder="setOrder"
+                @setordersale="setOrderSale"
     
                 @removeproduct="removeProduct"
                 @addproduct="addProduct"
                 @clearproduct="clearProduct"
 
-                v-bind:order="order"
+                :order="order"
+                :messages="messages"
             ></router-view>
             <OrderBlock :count="order.count"></OrderBlock>
         </section>
@@ -28,7 +30,7 @@ import Home from '../pages/Home'
 import OrderBlock from '../components/Order'
 
 import { store }  from '../core/store'
-import { getUser } from "./api"
+import { updateOrderUser, updateOrderUserSale } from "./api"
 import { getUser as getFromLocalUser } from "../utils/local"
 
 export default {
@@ -40,6 +42,10 @@ export default {
                 products: [],
                 count: 0,
                 total: 0
+            },
+            messages: {
+                text: '',
+                error: ''
             }
         }
     },
@@ -68,35 +74,82 @@ export default {
             this.order.total += product.price
         },
         setOrder() {
-            console.log('set order!')
-            this.clearOrder()
+            const user = getFromLocalUser();
+            const data = {
+                order: this.order,
+                user: user.id
+            }
+            if(this.order.total > 0) {
+                updateOrderUser(data)
+                    .then((json) => {
+                        this.messages.text = json.message
+                        this.clearOrder()
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        this.messages.error = err.message
+                    })
+            }
+        },
+        setOrderSale() {
+            const user = getFromLocalUser();
+            const data = {
+                order: this.order,
+                user: user.id
+            }
+            if(this.order.total > 0) {
+                updateOrderUserSale(data)
+                    .then((json) => {
+                        this.messages.text = json.message
+                        this.clearOrder()
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        this.messages.error = err.message
+                    })
+            }
         },
         clearOrder() {
-            console.log('clear!')
             this.order.products = []
             this.order.count = 0
             this.order.total  = 0
         },
-        removeProduct(id) {
-            console.log('remove!', id)
-            const product = this.order.products.find(product => product.id === id)
+        removeProduct(product) {
+            if (product.count > 1) {
+                const findProduct = this.order.products.find((prod) => product.id === prod.id)
+                const index = this.order.products.indexOf(findProduct)
+                this.order.products[index] = {
+                    ...product,
+                    count: --product.count
+                }
+            } else {
+                this.clearProduct(product.id) 
+            }
 
-            console.log(product)
-           // this.order.products = this.order.products.filter(product => product.id !== id)
-           // this.order.count--
-
-           // this.order.total -= product.price
+            this.order.count--
+            this.order.total -= product.price
         },
         addProduct(product) {
-            console.log("add product")
+            const findProduct = this.order.products.find((prod) => product.id === prod.id)
+            const index = this.order.products.indexOf(findProduct)
+            this.order.products[index] = {
+                ...product,
+                count: ++product.count
+            }
+
+            this.order.count++
+            this.order.total += product.price
         },
-        clearProduct() {
-            console.log("clear")
+        clearProduct(id) {
+            this.order.products = this.order.products.filter(product => product.id !== id)
         },
     },
     mounted () {
         const user = getFromLocalUser();
-        this.auth = !!user 
+
+        if(user) {
+            this.auth = !!user
+        } 
     }
 }
 </script>

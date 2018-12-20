@@ -8,6 +8,7 @@ var express = require('express'),
     foodsJSON = require("../data/foods.json"),
 	usersJSON = require("../data/users.json");
 
+
 var secret = "coffeemylife";
 
 router.get("/drinks", function(req, res, next) {
@@ -47,9 +48,60 @@ router.post("/user", function(req, res, next) { // get profile
 	});
 });
 
-router.put("/user", function(req, res, next) { // update procent
-	return res.status(200);
+router.put("/order", function(req, res, next) { // update procent
+	const userId = req.body.user;
+	const order = req.body.order;
+	const userList = usersJSON.users;
+
+	if (order.total > 0) {
+
+		const findUser = userList.find(userlist => userlist.id === userId);
+		const index = userList.indexOf(findUser);
+
+		const sale = order.total * (findUser.accumulationСardProcent / 100);
+		findUser.accumulationTotal += sale;
+
+		userList[index] = findUser;
+		const newUsersJSON = JSON.stringify({users: userList});  
+
+		fs.writeFileSync(path.resolve(__dirname,"../data/users.json"), newUsersJSON); 
+		
+		return res.status(200).send({
+			message: 'Заказ принят!'
+		});
+	} else {
+		return res.status(400).send({
+			message: 'Выполните заказ!'
+		});
+	}
 });
+
+router.put("/order/sale", function(req, res, next) {
+	const userId = req.body.user;
+	const order = req.body.order;
+	const userList = usersJSON.users;
+
+	const findUser = userList.find(userlist => userlist.id === userId);
+	const index = userList.indexOf(findUser);
+
+	if(findUser.accumulationTotal >= order.total) {
+
+		findUser.accumulationTotal -= order.total;
+
+		userList[index] = findUser;
+		const newUsersJSON = JSON.stringify({users: userList});  
+
+		fs.writeFileSync(path.resolve(__dirname,"../data/users.json"), newUsersJSON);
+
+		return res.status(200).send({
+			message: 'Заказ принят!'
+		});
+	} else {
+		return res.status(400).send({
+			message: 'Недостаточно суммы!'
+		});
+	}
+})
 
 router.post("/signup", function(req, res, next) {
 	const userList = usersJSON.users;
@@ -117,5 +169,6 @@ router.post("/login", function(req, res, next) {
 		}
 	});
 });
+
 
 module.exports = router;

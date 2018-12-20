@@ -116,5 +116,67 @@ export const getFoods = () => {
 }
 
 export const updateOrderUser = (data) => {
-    // set order
+    return new Promise((resolve, reject) =>{
+        const xhr = new XMLHttpRequest();
+        const url = `http://localhost:5000/api/order`;
+        
+        xhr.open("PUT", url, true); 
+
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if (this.status >= 200 && this.status < 300) {
+                resolve(JSON.parse(xhr.response));
+              } else {
+                reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+                });
+              }
+            };
+            xhr.onerror = function () {
+              reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        }
+
+        xhr.send(JSON.stringify({
+            order: data.order,
+            user: data.user
+        }));
+    })
+}
+
+export const updateOrderUserSale = (data) => {
+    return new Promise((resolve, reject) =>{
+        const xhr = new XMLHttpRequest();
+        const url = `http://localhost:5000/api/order/sale`;
+        
+        xhr.open("PUT", url, true); 
+
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+        xhr.onreadystatechange = function() {//Call a function when the state changes.
+            if (this.status >= 200 && this.status < 300) {
+                resolve(JSON.parse(xhr.response));
+              } else {
+                reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+                });
+              }
+            };
+            xhr.onerror = function () {
+              reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        }
+
+        xhr.send(JSON.stringify({
+            order: data.order,
+            user: data.user
+        }));
+    })
 }

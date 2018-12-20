@@ -1,19 +1,25 @@
 <template>
-    <div class="item">
-        <div v-bind:class="[isActive ? 'scale-up-center': null]">
-        <figure class="image is-228x228">
-            <img v-bind:src="data.url"/>
-        </figure>
-        <div class="content">
-            <strong>{{data.name}}</strong>
-            <p v-if="data.volume">{{data.volume}}</p>
-            <div class="info">
-                <p>Стоимость:</p>
-                <p>{{data.price}}р</p>
+    <div class="grid-item">
+        <div class="section-item">
+            <div class="picture">
+                <img v-bind:src="data.url"/>
             </div>
-            <button v-on:click="onProduct(data)" class="button is-primary">Взять</button>
-        </div>
-        </div>
+            <div class="grid-content">
+                <strong>{{data.name}}</strong>
+                <p v-if="data.volume">{{data.volume}}</p>
+                
+                <div class="info">
+                    <p>Стоимость:</p>
+                    <p>{{data.price}}р</p>
+                </div>
+
+                <div>
+                    <button v-if="!isActive" v-on:click="onProduct(data)" class="button is-primary">Взять</button>
+                    <button v-if="isActive" v-on:click="onProduct(data)" class="button is-info">Еще?</button>
+                    <span v-if="isActive" v-bind:class="[isActive ? 'scale-up-center': null]" class="tag is-link is-normal">В корзине</span>
+                </div>
+            </div>
+            </div>
     </div>
 </template>
 
@@ -37,28 +43,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.item {
-    width: 300px;
-    padding: 8px;
-    margin: 25px;
+.grid-item {
+    transition: all 1s ease-in-out 500ms;
+    align-items: stretch;
+    overflow: hidden;
+    display: flex;
+    max-width: 960px;
+
+    padding: 10px;
+
+    flex: 0 0 33.33%;
+    max-width: 33.33%;
 }
 
-.selected {
-    border: 4px solid #2ecc71;
+.picture {
+    transition: all .35s;
+    width: 100%;
 }
 
-.content {
-    margin: 2em;
+.grid-content {
+    display: flex;
+    flex-direction: column;
 }
+
 .info {
     display: flex;
+}
+
+.section-item {
+    background-color: #f2eae3;
 }
 
 .scale-up-center {
 -webkit-animation: wobble-ver-left 0.8s both;
 	        animation: wobble-ver-left 0.8s both;
-    border-radius: 6px;
-    border: 4px solid #fdbb04;
 }
 
 @-webkit-keyframes wobble-ver-left {
